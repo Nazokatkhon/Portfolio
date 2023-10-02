@@ -14,19 +14,32 @@ df = pd.read_csv(file)
 
 #%% TASK1 
 #(A)
-df2=df.loc[df['neighbourhood'] == "Clifton"] # filter by the row neighbourhood where the value is "Clifton"
-grp = df2.groupby('neighbourhood')["price"].mean() #
+t1a=df[df.neighbourhood == "Clifton"]["price"].mean() # 
+print("The mean price in Clifton neighbourhood:",t1a)
+
+#-----------
+#df2=df.loc[df['neighbourhood'] == "Clifton"] # filter by the row neighbourhood where the value is "Clifton"
+#grp = df2.groupby('neighbourhood')["price"].mean() #
 
 #%%
 #(B)
-df3=df.loc[df['neighbourhood'] == "Harlem"] # filter by the row neighbourhood where the value is "Harlem"
-grp2 = df3.groupby(['neighbourhood','room_type'])["id"].count() #
+t1b=df[(df.neighbourhood == "Harlem") & (df.room_type=="Private room")]["id"].count() 
+print("There are ", t1b, " private rooms in Harlem")
+
+#----------
+#df3=df.loc[df['neighbourhood'] == "Harlem"] # filter by the row neighbourhood where the value is "Harlem"
+#grp2 = df3.groupby(['neighbourhood','room_type'])["id"].count() #
 
 #%%
 #(C)
-df4=df3.loc[df['room_type']=="Private room"]
-grp3 = df4.groupby("host_id")["id"].count()#
-grp4 = grp3[grp3>1].count()
+t1c=df[(df.neighbourhood == "Harlem") & (df.room_type=="Private room")].groupby("host_id")["host_id"].count()
+t1c = t1c[t1c>1].count()
+print(t1c," hosts in Harlem have more than 1 private room")
+
+#----------
+#df4=df3.loc[df['room_type']=="Private room"]
+#grp3 = df4.groupby("host_id")["id"].count()#
+#grp4 = grp3[grp3>1].count()
 
 #%% TASK2
 #(A)
